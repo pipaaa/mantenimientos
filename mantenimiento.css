@@ -1,0 +1,96 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #000;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  color: #fff;
+}
+
+.background-glow {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, #00c3ff 0%, #000 60%);
+  animation: moveGlow 20s linear infinite alternate;
+  z-index: -2;
+  opacity: 0.15;
+}
+
+@keyframes moveGlow {
+  0% { transform: translate(-25%, -25%); }
+  100% { transform: translate(25%, 25%); }
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 40px;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+  animation: fadeInCard 1s ease-out;
+}
+
+@keyframes fadeInCard {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #ffd700, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+p {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+.small-text {
+  font-size: 0.95em;
+  color: #ccc;
+  margin-top: 25px;
+}
+
+.neon-loader {
+  margin: 30px auto 10px;
+  width: 60px;
+  height: 60px;
+  border: 5px solid #111;
+  border-top: 5px solid #00ffe7;
+  border-radius: 50%;
+  animation: neonSpin 1s linear infinite;
+  box-shadow: 0 0 15px #00ffe7;
+}
+
+@keyframes neonSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+.fade-in.delay-1 { animation-delay: 0.4s; }
+.fade-in.delay-2 { animation-delay: 0.8s; }
+.fade-in.delay-3 { animation-delay: 1.2s; }
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
