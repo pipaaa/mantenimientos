@@ -1,75 +1,308 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Fútbol Derio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>futbolderio — Bienvenidos</title>
+  <meta name="description" content="futbolderio — Bienvenidos. Cuenta atrás hasta la hora del partido y acceso al enlace oficial." />
   <style>
+    :root{
+      --bg:#0a0a0f;
+      --fg:#eaeaf6;
+      --accent:#6df7c1;
+      --accent2:#7aa2ff;
+      --warning:#ffda6b;
+      --danger:#ff6b6b;
+      --ok:#85ffa4;
+      --glass: rgba(255,255,255,.06);
+      --glass-strong: rgba(255,255,255,.12);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
-      margin:0;
-      font-family:Inter, sans-serif;
-      background:#0b0f1a;
-      color:#fff;
-      display:flex;
-      justify-content:center;
-      padding:32px;
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue",
+      Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; background: radial-gradient(1200px 800px at 30% 10%, #131327, #0a0a0f 60%);
+      color:var(--fg); overflow-x:hidden;
     }
-    .wrap{max-width:800px;width:100%}
-    h1{margin:0 0 12px}
-    .card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.2);border-radius:16px;padding:24px}
-    .teams{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-    .vs{font-weight:800;color:#ccc}
-    .link-block{margin-top:20px;padding:18px;border-radius:14px;
-      background:linear-gradient(135deg,rgba(124,77,255,0.2),rgba(110,231,255,0.2));}
-    .big-link{
-      display:block;text-align:center;font-size:20px;font-weight:800;
-      background:#fff;color:#0b0f1a;text-decoration:underline;
-      padding:14px;border-radius:10px;margin-bottom:10px;
+
+    /* Partículas de fondo (solo CSS) */
+    .particles{position:fixed; inset:0; overflow:hidden; pointer-events:none; z-index:0}
+    .dot{
+      position:absolute; width:6px; height:6px; border-radius:50%;
+      background: radial-gradient(circle, #ffffff, #ffffff00 70%);
+      filter: blur(0.2px);
+      opacity:.25; animation: floatUp linear infinite;
     }
-    .url-row{display:flex;gap:10px;align-items:center}
-    .url-text{flex:1;background:rgba(0,0,0,0.4);padding:10px;border-radius:8px;
-      font-family:monospace;font-size:13px;overflow:auto}
-    button{padding:10px 14px;border:none;border-radius:8px;font-weight:700;cursor:pointer}
-    .copy{background:linear-gradient(135deg,#6ee7ff,#7c4dff);color:#000}
+    @keyframes floatUp{
+      from{ transform: translateY(110vh) translateX(var(--dx)); opacity:.0}
+      10%{opacity:.25}
+      90%{opacity:.25}
+      to{ transform: translateY(-10vh) translateX(var(--dx)); opacity:0}
+    }
+
+    /* Contenedor principal */
+    .wrap{position:relative; z-index:1; min-height:100%; display:flex; align-items:center; justify-content:center; padding:24px}
+    .card{
+      width:min(920px, 92vw); background: linear-gradient(180deg, var(--glass-strong), var(--glass));
+      border:1px solid rgba(255,255,255,.12); border-radius:18px; padding:28px; backdrop-filter: blur(12px);
+      box-shadow: 0 30px 80px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+
+    /* Intro megallamada */
+    .intro{
+      display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center; padding:24px 8px 8px;
+      animation: popCard .7s ease-out both;
+    }
+    @keyframes popCard{from{transform:translateY(12px) scale(.98); opacity:0} to{transform:none; opacity:1}}
+
+    .brand{
+      font-size: clamp(40px, 8vw, 90px); font-weight: 800; letter-spacing: -0.02em; line-height:1.02;
+      background: conic-gradient(from 0deg, #7aa2ff, #6df7c1, #ff8bd1, #ffd36d, #7aa2ff);
+      background-size: 200% 200%;
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      filter: drop-shadow(0 4px 18px rgba(122,162,255,.25));
+      animation: hue 6s linear infinite, wiggle 2.5s ease-in-out infinite;
+    }
+    .subtitle{
+      font-size: clamp(18px, 3.2vw, 26px); opacity:.9; font-weight:600;
+      background: linear-gradient(90deg, var(--fg), #c9f7ff); -webkit-background-clip:text; background-clip:text; color:transparent;
+      animation: hue 10s linear infinite reverse;
+    }
+    @keyframes hue{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(360deg)}}
+    @keyframes wiggle{
+      0%,100%{transform: perspective(600px) rotateX(0) rotateY(0) scale(1)}
+      25%{transform: perspective(600px) rotateX(6deg) rotateY(-4deg) scale(1.015)}
+      50%{transform: perspective(600px) rotateX(-4deg) rotateY(5deg) scale(1.01)}
+      75%{transform: perspective(600px) rotateX(3deg) rotateY(2deg) scale(1.02)}
+    }
+
+    /* Separador animado */
+    .bar{
+      height:2px; width:100%; background:linear-gradient(90deg, transparent, var(--accent) 20%, var(--accent2) 80%, transparent);
+      opacity:.85; margin:16px 0 10px; position:relative; overflow:hidden; border-radius:999px;
+    }
+    .bar::after{
+      content:""; position:absolute; inset:0; background:linear-gradient(90deg, transparent, white, transparent);
+      opacity:.65; transform: translateX(-100%); animation: sweep 2.6s ease-in-out infinite;
+    }
+    @keyframes sweep{to{transform: translateX(100%)}}
+
+    /* Cuenta atrás */
+    .timer{
+      display:flex; flex-direction:column; align-items:center; gap:18px; padding:18px 8px 8px; text-align:center;
+    }
+    .timer h2{
+      margin:0; font-size: clamp(18px, 3vw, 22px); font-weight:700; letter-spacing:.02em; opacity:.9
+    }
+    .digits{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
+    }
+    .unit{
+      min-width:110px; padding:14px 12px; border-radius:14px; background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
+    }
+    .n{
+      font-variant-numeric: tabular-nums; font-size: clamp(30px, 6vw, 56px); font-weight: 800; letter-spacing:.02em;
+      text-shadow: 0 6px 18px rgba(0,0,0,.45);
+      background: linear-gradient(180deg, #fff, #c9d3ff);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    .label{font-size:12px; text-transform:uppercase; letter-spacing:.18em; opacity:.75}
+
+    /* CTA */
+    .cta{
+      display:flex; flex-direction:column; align-items:center; gap:12px; padding:18px 0 8px;
+    }
+    .btn{
+      font-size: clamp(16px, 2.8vw, 18px); font-weight:800; letter-spacing:.02em;
+      border:0; padding:14px 22px; border-radius:12px; cursor:not-allowed;
+      background: linear-gradient(90deg, #6dffd8, #6db4ff); color:#0c1020;
+      box-shadow: 0 12px 28px rgba(109, 244, 223, .25), 0 8px 18px rgba(109, 179, 255, .18);
+      transition: transform .12s ease, filter .12s ease, box-shadow .12s ease, opacity .2s ease;
+      opacity:.65;
+    }
+    .btn.enabled{
+      cursor:pointer; opacity:1; transform: translateY(0);
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    .btn.enabled:hover{ transform: translateY(-1px); filter: brightness(1.05)}
+    @keyframes pulse{
+      0%,100%{ box-shadow: 0 14px 34px rgba(109,244,223,.28), 0 10px 24px rgba(109,179,255,.20)}
+      50%{ box-shadow: 0 6px 18px rgba(109,244,223,.20), 0 4px 12px rgba(109,179,255,.14)}
+    }
+    .note{font-size:12px; opacity:.75}
+
+    /* Footer minúsculo */
+    footer{margin-top:18px; text-align:center; font-size:12px; opacity:.6}
+
+    /* Ocultadores por etapas */
+    .hidden{display:none}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Fútbol Derio</h1>
-    <div class="card">
-      <div class="teams">
-        <div><strong>Athletic Bilbao</strong></div>
-        <div class="vs">VS</div>
-        <div><strong>Rayo Vallecano</strong></div>
-      </div>
-      <p>LaLiga Santander • 25/08/2025 • Deportes en vivo</p>
+  <!-- Partículas -->
+  <div class="particles" aria-hidden="true" id="particles"></div>
 
-      <!-- BLOQUE ENLACE -->
-      <div class="link-block">
-        <a class="big-link" href="https://mayld6f.51pimdsit55yyfight.shop/es/football/spanish-la-liga-4223510/athletic-club-vs-rayo-vallecano.html?icg=RVM" 
-           target="_blank" rel="noopener">
-          👉 Ver el partido en directo
-        </a>
-        <div class="url-row">
-          <div class="url-text" id="urlText">
-            https://mayld6f.51pimdsit55yyfight.shop/es/football/spanish-la-liga-4223510/athletic-club-vs-rayo-vallecano.html?icg=RVM
+  <div class="wrap">
+    <main class="card">
+      <!-- INTRO hipervitaminada -->
+      <section class="intro" id="intro">
+        <div class="brand" aria-label="futbolderio">futbolderio</div>
+        <div class="subtitle" aria-label="bienvenidos">¡bienvenidos!</div>
+        <div class="bar"></div>
+      </section>
+
+      <!-- CUENTA ATRÁS -->
+      <section class="timer hidden" id="timer">
+        <h2>Cuenta atrás hasta el pitido (19:03 de hoy)</h2>
+        <div class="digits" role="timer" aria-live="polite" aria-atomic="true">
+          <div class="unit">
+            <div class="n" id="d">0</div>
+            <div class="label">días</div>
           </div>
-          <button class="copy" id="copyBtn">Copiar</button>
+          <div class="unit">
+            <div class="n" id="h">00</div>
+            <div class="label">horas</div>
+          </div>
+          <div class="unit">
+            <div class="n" id="m">00</div>
+            <div class="label">minutos</div>
+          </div>
+          <div class="unit">
+            <div class="n" id="s">00</div>
+            <div class="label">segundos</div>
+          </div>
         </div>
-      </div>
-    </div>
+
+        <div class="cta">
+          <button class="btn" id="goBtn" disabled>Entrar al partido</button>
+          <div class="note" id="note">El acceso se habilitará exactamente a las 19:03 (hora local).</div>
+        </div>
+      </section>
+
+      <footer>© <span id="year"></span> futbolderio · Hecho con garra.</footer>
+    </main>
   </div>
 
   <script>
-    const copyBtn = document.getElementById("copyBtn");
-    const urlText = document.getElementById("urlText").textContent.trim();
-    copyBtn.addEventListener("click", async ()=>{
-      try{
-        await navigator.clipboard.writeText(urlText);
-        copyBtn.textContent="¡Copiado!";
-        setTimeout(()=>copyBtn.textContent="Copiar",1200);
-      }catch(e){alert("Copia manual: "+urlText);}
+    // ====== CONFIGURACIÓN BÁSICA ======
+    // Enlace de destino (el que me diste):
+    const TARGET_URL = "https://emmajt92.bendchance5kjkpc0.shop/es/football/spanish-la-liga-4220903/real-betis-vs-athletic-club.html?icg=RVM&ilang=es";
+    // Hora objetivo: HOY a las 19:03 (hora local del navegador)
+    function todayAt(hour, minute){
+      const t = new Date();
+      t.setHours(hour, minute, 0, 0);
+      return t;
+    }
+    const targetTime = todayAt(19, 3);
+
+    // ====== UTILIDADES ======
+    const $ = (sel) => document.querySelector(sel);
+    const pad = (n) => n.toString().padStart(2, "0");
+
+    // ====== PARTÍCULAS ======
+    (function spawnParticles(){
+      const container = document.getElementById("particles");
+      const count = Math.min(120, Math.floor(window.innerWidth/8));
+      for(let i=0;i<count;i++){
+        const d = document.createElement("div");
+        d.className = "dot";
+        // posición y parámetros aleatorios
+        const x = Math.random()*100;
+        const delay = Math.random()*6;
+        const duration = 8 + Math.random()*10;
+        const dx = (Math.random()*2-1)*50 + "px"; // deriva horizontal
+        d.style.left = x+"vw";
+        d.style.setProperty("--dx", dx);
+        d.style.animationDuration = duration+"s";
+        d.style.animationDelay = (-delay)+"s";
+        container.appendChild(d);
+      }
+    })();
+
+    // ====== SECUENCIA DE INTRO ======
+    const intro = $("#intro");
+    const timer = $("#timer");
+    const yearEl = $("#year");
+    yearEl.textContent = new Date().getFullYear();
+
+    // mostrar intro ~3.2s y luego revelar el timer
+    setTimeout(()=>{
+      intro.classList.add("hidden");
+      timer.classList.remove("hidden");
+    }, 3200);
+
+    // ====== CUENTA ATRÁS ======
+    const dEl = $("#d"), hEl = $("#h"), mEl = $("#m"), sEl = $("#s");
+    const goBtn = $("#goBtn"), note = $("#note");
+
+    function updateCountdown(){
+      const now = new Date();
+      let diff = targetTime - now;
+
+      if(diff <= 0){
+        // Tiempo alcanzado: 0 todo, habilitar botón
+        dEl.textContent = "0";
+        hEl.textContent = "00";
+        mEl.textContent = "00";
+        sEl.textContent = "00";
+        enableAccess();
+        return; // deja de actualizar
+      }
+
+      const sec = Math.floor(diff/1000);
+      const days = Math.floor(sec / 86400);
+      const hours = Math.floor((sec % 86400)/3600);
+      const minutes = Math.floor((sec % 3600)/60);
+      const seconds = sec % 60;
+
+      dEl.textContent = days;
+      hEl.textContent = pad(hours);
+      mEl.textContent = pad(minutes);
+      sEl.textContent = pad(seconds);
+      requestAnimationFrame(()=>{}); // micro tick para accesibilidad
+
+      // seguir actualizando cada 250ms para suavidad
+    }
+
+    let ticker = setInterval(updateCountdown, 250);
+    updateCountdown();
+
+    function enableAccess(){
+      clearInterval(ticker);
+      goBtn.disabled = false;
+      goBtn.classList.add("enabled");
+      goBtn.setAttribute("aria-live","polite");
+      goBtn.textContent = "Entrar al partido";
+      note.textContent = "¡Listo! Pulsa el botón para entrar.";
+      goBtn.style.cursor = "pointer";
+    }
+
+    // Si ya es más tarde que la hora objetivo al cargar, habilita de inmediato
+    if(new Date() >= targetTime){
+      enableAccess();
+      dEl.textContent = "0";
+      hEl.textContent = "00";
+      mEl.textContent = "00";
+      sEl.textContent = "00";
+    }
+
+    // Click -> redirección manual (nunca automática)
+    goBtn.addEventListener("click", ()=>{
+      if(!goBtn.disabled){
+        // Pequeña animación de feedback
+        goBtn.style.transform = "scale(0.98)";
+        setTimeout(()=>{ window.location.href = TARGET_URL; }, 120);
+      }
+    });
+
+    // Salvaguarda: si el usuario cambia la hora del sistema hacia atrás,
+    // mantenemos el botón bloqueado hasta que se cumpla localmente.
+    document.addEventListener("visibilitychange", ()=>{
+      if(document.visibilityState === "visible"){
+        if(new Date() >= targetTime) enableAccess();
+      }
     });
   </script>
 </body>
