@@ -3,47 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirigiendo...</title>
+  <title>Play View</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@tailwindcss/forms"></script>
+  <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #121212;
-      color: white;
-      font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      min-height: 100vh;
+      overflow: hidden;
     }
-    .spinner {
-      border: 5px solid rgba(255, 255, 255, 0.2);
-      border-top: 5px solid #ff0000;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      animation: spin 1s linear infinite;
-      margin-top: 20px;
+    .fade-in {
+      animation: fadeIn 1.5s ease-in-out;
     }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .floating {
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translatey(0px); }
+      50% { transform: translatey(-20px); }
+      100% { transform: translatey(0px); }
     }
   </style>
 </head>
-<body>
-  <h1>Redirigiendo...</h1>
-  <p>Serás llevado a la página en unos segundos.</p>
-  <div class="spinner"></div>
+<body class="flex flex-col items-center justify-center text-white">
+
+  <!-- Header -->
+  <header class="fade-in text-center p-6">
+    <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight drop-shadow-lg">🚀 Play View</h1>
+    <p class="mt-4 text-lg md:text-xl opacity-80">Tu pantalla, en directo, con estilo</p>
+  </header>
+
+  <!-- Animación decorativa -->
+  <div class="absolute top-10 left-10 w-32 h-32 bg-pink-500 rounded-full blur-2xl opacity-40 floating"></div>
+  <div class="absolute bottom-20 right-20 w-40 h-40 bg-blue-400 rounded-full blur-3xl opacity-40 floating"></div>
+
+  <!-- Contenedor del iframe -->
+  <main class="relative w-11/12 md:w-4/5 h-[70vh] rounded-2xl overflow-hidden shadow-2xl fade-in">
+    <iframe allow="camera; microphone; fullscreen; display-capture; autoplay"
+      src="https://meet.jit.si/AthGirDerio"
+      style="height: 100%; width: 100%; border: 0px;">
+    </iframe>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-8 text-center opacity-70 text-sm">
+    <p>✨ Hecho con pasión en <span class="font-bold">Play View</span></p>
+  </footer>
 
   <script>
-    // Cambia esta URL por la que quieras
-    const destino = "https://mayuk3s.51pimdsit55yyfight.shop/es/football/spanish-la-liga-4209691/athletic-club-vs-girona-fc.html?icg=RVM&ilang=es";  
-
-    // Redirige después de 3 segundos
+    // Pequeña animación de entrada en el título
+    document.querySelector("h1").style.opacity = 0;
     setTimeout(() => {
-      window.location.href = destino;
-    }, 3000);
+      document.querySelector("h1").style.transition = "opacity 2s";
+      document.querySelector("h1").style.opacity = 1;
+    }, 500);
   </script>
 </body>
 </html>
