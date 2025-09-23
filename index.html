@@ -3,67 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Play View</title>
+  <title>Play View - Mantenimiento</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/@tailwindcss/forms"></script>
-  <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Montserrat', sans-serif;
-      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      background: linear-gradient(135deg, #232526, #414345);
       min-height: 100vh;
-      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
     }
     .fade-in {
-      animation: fadeIn 1.5s ease-in-out;
+      animation: fadeIn 2s ease-in-out;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .floating {
-      animation: float 6s ease-in-out infinite;
+    .gear {
+      animation: spin 6s linear infinite;
     }
-    @keyframes float {
-      0% { transform: translatey(0px); }
-      50% { transform: translatey(-20px); }
-      100% { transform: translatey(0px); }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
-<body class="flex flex-col items-center justify-center text-white">
-
-  <!-- Header -->
-  <header class="fade-in text-center p-6">
-    <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight drop-shadow-lg">🚀 Play View</h1>
-    <p class="mt-4 text-lg md:text-xl opacity-80">Tu pantalla, en directo, con estilo</p>
-  </header>
-
-  <!-- Animación decorativa -->
-  <div class="absolute top-10 left-10 w-32 h-32 bg-pink-500 rounded-full blur-2xl opacity-40 floating"></div>
-  <div class="absolute bottom-20 right-20 w-40 h-40 bg-blue-400 rounded-full blur-3xl opacity-40 floating"></div>
-
-  <!-- Contenedor del iframe -->
-  <main class="relative w-11/12 md:w-4/5 h-[70vh] rounded-2xl overflow-hidden shadow-2xl fade-in">
-    <iframe allow="camera; microphone; fullscreen; display-capture; autoplay"
-      src="https://meet.livekit.io/rooms/7guz-9wwl"
-      style="height: 100%; width: 100%; border: 0px;">
-    </iframe>
-  </main>
-
-  <!-- Footer -->
-  <footer class="mt-8 text-center opacity-70 text-sm">
-    <p>✨ Hecho con pasión en <span class="font-bold">Play View</span></p>
-  </footer>
-
-  <script>
-    // Pequeña animación de entrada en el título
-    document.querySelector("h1").style.opacity = 0;
-    setTimeout(() => {
-      document.querySelector("h1").style.transition = "opacity 2s";
-      document.querySelector("h1").style.opacity = 1;
-    }, 500);
-  </script>
+<body>
+  <div class="fade-in">
+    <svg class="gear mx-auto mb-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="100" height="100">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3a.75.75 0 01.75.75v1.5a.75.75 0 01-.75.75h-1.5A.75.75 0 017.5 5.25v-1.5A.75.75 0 018.25 3h1.5zm8.5 0a.75.75 0 01.75.75v1.5a.75.75 0 01-.75.75h-1.5a.75.75 0 01-.75-.75v-1.5a.75.75 0 01.75-.75h1.5zM3 9.75a.75.75 0 01.75-.75h1.5a.75.75 0 01.75.75v1.5a.75.75 0 01-.75.75h-1.5A.75.75 0 013 11.25v-1.5zm18 0a.75.75 0 01.75-.75h1.5a.75.75 0 01.75.75v1.5a.75.75 0 01-.75.75h-1.5a.75.75 0 01-.75-.75v-1.5zM12 7.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9z" />
+    </svg>
+    <h1 class="text-5xl font-extrabold mb-4">🔧 Play View</h1>
+    <p class="text-xl opacity-80">Estamos en mantenimiento</p>
+    <p class="mt-2 text-sm opacity-60">Volvemos en breve con novedades increíbles 🚀</p>
+  </div>
 </body>
 </html>
